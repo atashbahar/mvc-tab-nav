@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="<%= Url.Content("~/Content/Site.css") %>" rel="stylesheet" type="text/css" />    
+    <title>MvcTabNav - <asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+</head>
+<body>
+    <div id="container">
+        <div id="header">    
+            <h1>ASP.NET MVC tab-based navigation</h1>
+        </div>  
+      
+        <div id="menubar">
+            <%= Html.SimpleNav(new[] {
+                new SimpleNavItem{Text="Home", Action="Index", Controller = "Home"},
+                new SimpleNavItem{Text="Blog", Action="Index", Controller = "Blog", GetSelected = ((a, c) => (c == "Blog"))},
+                new SimpleNavItem{Text="About", Action="About", Controller = "Home", GetSelected = ((a, c) => c == "Home" && a == "About")},
+                new SimpleNavItem{Text="Contact", Action="Contact", Controller = "Home", GetSelected = ((a, c) => c == "Home" && a == "Contact")}
+            }) %>  
+        </div>
+    
+        <div id="content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+    
+        <div id="footer">
+            <p>© footer stuff goes here!</p>
+        </div>
+    </div>
+</body>
+</html>
